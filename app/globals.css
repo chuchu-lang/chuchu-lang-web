@@ -1819,22 +1819,22 @@ button {
   0%,
   6% {
     width: 0;
-    animation-timing-function: steps(13, end);
+    animation-timing-function: steps(10, end);
   }
   13%,
   100% {
-    width: 13ch;
+    width: 10ch;
   }
 }
 @keyframes t2 {
   0%,
   14% {
     width: 0;
-    animation-timing-function: steps(15, end);
+    animation-timing-function: steps(12, end);
   }
   24%,
   100% {
-    width: 15ch;
+    width: 12ch;
   }
 }
 @keyframes t3 {

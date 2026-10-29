@@ -242,7 +242,7 @@ export default function AboutPage() {
               </div>
               <pre className="about-code-body">
                 <code>
-                  <span className="kw">assign</span> greeting to 42
+                  <span className="kw">assign</span> greeting 42
                   {"\n"}
                   <span className="kw">show</span> greeting
                 </code>

@@ -190,14 +190,14 @@ export default function Home() {
                   <span className="editor-ln">1</span>
                   <span className="tp t1">
                     <span className="kw">assign</span> x{" "}
-                    <span className="kw">to</span> <span className="num">5</span>
+                    <span className="num">5</span>
                   </span>
                 </div>
                 <div className="editor-line">
                   <span className="editor-ln">2</span>
                   <span className="tp t2">
                     <span className="kw">reassign</span> x{" "}
-                    <span className="kw">to</span> <span className="num">6</span>
+                    <span className="num">6</span>
                   </span>
                 </div>
                 <div className="editor-line">
@@ -275,7 +275,7 @@ export default function Home() {
 
           <p className="how-note">
             A simplified illustration of how Cheeku handles{" "}
-            <span>assign total to 2 + 3</span>. The real compiler does more at
+            <span>assign total 2 + 3</span>. The real compiler does more at
             every stage.
           </p>
         </div>
@@ -314,18 +314,16 @@ export default function Home() {
                 <div className="err-code">
                   <div>
                     <span className="err-ln">{"1  "}</span>
-                    <span className="err-kw">assign</span> x{" "}
-                    <span className="err-kw">to</span> 5
+                    <span className="err-kw">assign</span> x 5
                   </div>
                   <div>
                     <span className="err-ln">{"2  "}</span>
                     <span className="err-kw">reassign</span> x{" "}
-                    <span className="err-kw">to</span>{" "}
                     <span className="err-wavy">true</span>
                   </div>
                 </div>
                 <div className="err-msg">
-                  Type mismatch: expected Int, found Bool at 28..32
+                  Type mismatch: expected Int, found Bool at 22..26
                 </div>
               </div>
             </article>
@@ -351,8 +349,7 @@ export default function Home() {
                 <div className="err-code">
                   <div>
                     <span className="err-ln">{"1  "}</span>
-                    <span className="err-kw">assign</span> a{" "}
-                    <span className="err-kw">to</span> [1, 2, 3]
+                    <span className="err-kw">assign</span> a [1, 2, 3]
                   </div>
                   <div>
                     <span className="err-ln">{"2  "}</span>
@@ -360,7 +357,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="err-msg">
-                  cheeku runtime: array index out of bounds at 27..31
+                  cheeku runtime: array index out of bounds at 24..28
                 </div>
               </div>
             </article>
@@ -377,7 +374,7 @@ export default function Home() {
                   <div key={row.name} className="trow">
                     <span className="trow-code">
                       <span className="kw">assign</span> {row.name}{" "}
-                      <span className="kw">to</span> {row.value}
+                      {row.value}
                     </span>
                     <span className={`chip ${row.chip}`}>{row.type}</span>
                   </div>
