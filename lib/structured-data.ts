@@ -1,4 +1,5 @@
 import { absoluteUrl, SITE_URL, site } from "./site";
+import { TEAM } from "./team";
 
 /**
  * schema.org entities describing the project.
@@ -37,6 +38,12 @@ export function siteStructuredData() {
           "@type": "ImageObject",
           url: absoluteUrl("/chuchu-logo-3.svg"),
         },
+        founder: TEAM.map((member) => ({
+          "@type": "Person",
+          name: member.name,
+          jobTitle: member.role,
+          sameAs: [member.profiles.github, member.profiles.linkedin],
+        })),
         sameAs: [
           site.links.source,
           site.links.docsSource,

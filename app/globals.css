@@ -1613,6 +1613,12 @@ button {
 }
 
 /* Team */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 200deg;
+}
+
 .about-team {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1628,6 +1634,44 @@ button {
   gap: clamp(18px, 2.8vw, 28px);
   min-width: 0;
   padding: clamp(20px, 2.8vw, 28px);
+  background:
+    linear-gradient(160deg, rgba(16, 178, 63, 0), transparent 55%),
+    var(--glass);
+}
+.about-team-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--border-angle),
+    #10b23f,
+    #fad705,
+    #fd8ab9,
+    #10b23f
+  );
+  /* Keep only the padding ring: the content box is cut out. */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  opacity: 0;
+  pointer-events: none;
+  animation: team-border-spin 3.6s linear infinite;
+  animation-play-state: paused;
+  transition:
+    opacity 0.45s var(--ease),
+    padding 0.45s var(--ease),
+    filter 0.45s var(--ease);
+}
+.about-team-card:focus-within::before {
+  opacity: 1;
+  padding: 2.25px;
+  animation-play-state: running;
 }
 .about-team-initials {
   display: grid;
@@ -1635,10 +1679,20 @@ button {
   width: 64px;
   height: 64px;
   border-radius: 18px;
+  background: var(--member, var(--green));
   font-family: var(--mono);
   font-size: 20px;
   font-weight: 600;
   color: var(--ink);
+  transition: transform 0.6s var(--ease);
+}
+/* Name and role read as one unit, tighter than the card's own gap. */
+.about-team-id {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
 }
 .about-team-name {
   margin: 0;
@@ -1648,6 +1702,154 @@ button {
   line-height: 1.2;
   letter-spacing: -0.025em;
   overflow-wrap: anywhere;
+}
+.about-team-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 12px 0 10px;
+  border-radius: 999px;
+  background: rgba(20, 32, 26, 0.06);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.about-team-role-dot {
+  display: block;
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  background: var(--member, var(--green));
+}
+
+/* Founder gets an accent-tinted role badge. */
+.about-team-card-founder .about-team-role {
+  background: #ddf3e4;
+  color: var(--accent-deep);
+}
+.about-team-card-founder .about-team-role-dot {
+  background: var(--accent);
+}
+
+/* Team profile links. Sit at the foot of the card, so the rows line up
+   across cards whatever the name length. Each button carries a brand
+   colour that slides up from below on hover, focus and press. */
+.about-team-socials {
+  display: flex;
+  gap: 10px;
+  margin: auto 0 0;
+  padding: 0;
+  list-style: none;
+}
+.about-team-social {
+  --brand: var(--ink);
+  --glow: rgba(20, 32, 26, 0.45);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 14px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 0 0 1px var(--hair),
+    0 8px 20px -10px rgba(20, 48, 30, 0.25);
+  transition:
+    transform 0.45s var(--ease),
+    color 0.3s,
+    box-shadow 0.45s var(--ease);
+}
+.about-team-social-linkedin {
+  --brand: #0a66c2;
+  --glow: rgba(10, 102, 194, 0.5);
+}
+.about-team-social::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--brand);
+  transform: translateY(101%);
+  transition: transform 0.45s var(--ease);
+}
+.about-team-social-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.45s var(--ease);
+}
+.about-team-social:focus-visible,
+.about-team-social:active {
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 0 1px transparent,
+    0 14px 24px -12px var(--glow);
+}
+.about-team-social:focus-visible::before,
+.about-team-social:active::before {
+  transform: none;
+}
+.about-team-social:active {
+  transform: scale(0.94);
+}
+@media (hover: hover) and (pointer: fine) {
+  .about-team-card:hover {
+    background:
+      linear-gradient(160deg, rgba(16, 178, 63, 0.09), transparent 55%),
+      var(--glass);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 0 0 1px rgba(16, 178, 63, 0.22),
+      0 44px 80px -28px rgba(16, 122, 59, 0.36),
+      0 10px 28px -10px rgba(253, 138, 185, 0.22);
+  }
+  .about-team-card:hover::before {
+    opacity: 1;
+    padding: 2.25px;
+    filter: saturate(1.15);
+    animation-play-state: running;
+  }
+  .about-team-card:hover .about-team-initials {
+    transform: rotate(-6deg) scale(1.06);
+  }
+  /* The buttons rise one after the other as the card lifts. */
+  .about-team-card:hover .about-team-social {
+    transform: translateY(-2px);
+  }
+  .about-team-card:hover li + li .about-team-social {
+    transition-delay: 0.06s;
+  }
+  .about-team-card .about-team-social:hover {
+    color: #fff;
+    transform: translateY(-4px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 0 0 1px transparent,
+      0 16px 28px -12px var(--glow);
+  }
+  .about-team-social:hover::before {
+    transform: none;
+  }
+  .about-team-card:hover li .about-team-social:hover {
+    transition-delay: 0s;
+  }
+  .about-team-social:hover .about-team-social-icon {
+    transform: scale(1.12) rotate(-8deg);
+  }
+  .about-team-card .about-team-social:active {
+    transform: translateY(-1px) scale(0.94);
+  }
 }
 
 /* Repository cards */
@@ -1778,6 +1980,11 @@ button {
 @keyframes spin {
   to {
     transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes team-border-spin {
+  to {
+    --border-angle: 560deg;
   }
 }
 @keyframes panelin {
@@ -2050,7 +2257,8 @@ button {
   .feature-label,
   .about-code-lang,
   .about-terminal-bar,
-  .about-fact-k {
+  .about-fact-k,
+  .about-team-role {
     font-size: 12px;
   }
   .opt-text {

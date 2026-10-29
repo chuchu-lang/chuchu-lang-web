@@ -3,9 +3,11 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
+import TeamCard from "@/components/team-card";
 import { JsonLd } from "@/lib/json-ld";
 import { site } from "@/lib/site";
 import { aboutStructuredData } from "@/lib/structured-data";
+import { TEAM } from "@/lib/team";
 
 // Lets style objects carry CSS custom properties like --d.
 type Vars = CSSProperties & Record<`--${string}`, string>;
@@ -129,13 +131,6 @@ const LIMITS = [
   "Function annotations cover scalars only",
   "No language-level input API, JIT or automatic parallelism",
   "Host-native only — there is no cross-OS target flag",
-];
-
-const TEAM = [
-  { name: "Nouman Ejaz", initials: "NE", color: "#10B23F" },
-  { name: "Abdul Sammad", initials: "AS", color: "#FAD705" },
-  { name: "Arslan Amjad", initials: "AA", color: "#FD8AB9" },
-  { name: "Ammar Baig", initials: "AB", color: "#A7B8FF" },
 ];
 
 export default function AboutPage() {
@@ -434,21 +429,13 @@ export default function AboutPage() {
           The minds behind Chuchu
         </h2>
         <p className="lede">
-          Meet the people building the Chuchu programming language.
+          Chuchu was founded by Nouman Ejaz and is built together with three
+          co-founders. Meet the people behind the language and its compiler.
         </p>
 
         <ul className="about-team" role="list">
           {TEAM.map((member) => (
-            <li key={member.name} className="glass card about-team-card">
-              <span
-                className="about-team-initials"
-                style={{ backgroundColor: member.color }}
-                aria-hidden="true"
-              >
-                {member.initials}
-              </span>
-              <h3 className="about-team-name">{member.name}</h3>
-            </li>
+            <TeamCard key={member.name} member={member} />
           ))}
         </ul>
       </section>
