@@ -14,8 +14,10 @@ export type ProfileNetwork = "github" | "linkedin";
 export type TeamMember = {
   name: string;
   role: TeamRole;
-  /** Brand colour behind the member's initials. */
+  /** Brand colour for the member's role dot. */
   color: string;
+  /** Portrait path under `public/`. */
+  image: string;
   profiles: Record<ProfileNetwork, string>;
 };
 
@@ -24,6 +26,7 @@ export const TEAM = [
     name: "Nouman Ejaz",
     role: "Founder",
     color: "#10B23F",
+    image: "/team/nouman-ejaz.jpg",
     profiles: {
       github: "https://github.com/Nouman64-cat",
       linkedin: "https://www.linkedin.com/in/nouman-ejaz-64251125b/",
@@ -33,6 +36,7 @@ export const TEAM = [
     name: "Abdul Sammad",
     role: "Co-founder",
     color: "#FAD705",
+    image: "/team/abdul-sammad-bw-white.png",
     profiles: {
       github: "https://github.com/abdulsammad2004",
       linkedin: "https://www.linkedin.com/in/abdul-sammad-b90b9b218/",
@@ -42,6 +46,7 @@ export const TEAM = [
     name: "Arslan Amjad",
     role: "Co-founder",
     color: "#FD8AB9",
+    image: "/team/arslan-amjad.jpg",
     profiles: {
       github: "https://github.com/thenewapple2004-netizen",
       linkedin: "https://www.linkedin.com/in/arslan-amjad-a25291282/",
@@ -51,19 +56,10 @@ export const TEAM = [
     name: "Ammar Baig",
     role: "Co-founder",
     color: "#A7B8FF",
+    image: "/team/ammar-baig-bw-white.png",
     profiles: {
       github: "https://github.com/ammarbaig89",
       linkedin: "https://www.linkedin.com/in/ammarbaig89/",
     },
   },
 ] as const satisfies readonly TeamMember[];
-
-/** "Nouman Ejaz" -> "NE". Derived so initials can never drift from the name. */
-export function initialsOf(name: string): string {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .map((word) => word[0])
-    .join("")
-    .toUpperCase();
-}

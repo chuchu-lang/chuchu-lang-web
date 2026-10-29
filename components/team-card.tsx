@@ -1,6 +1,7 @@
 import type { ComponentType, CSSProperties } from "react";
+import Image from "next/image";
 import { GitHubIcon, LinkedInIcon } from "@/components/social-icons";
-import { initialsOf, type ProfileNetwork, type TeamMember } from "@/lib/team";
+import type { ProfileNetwork, TeamMember } from "@/lib/team";
 
 // Lets style objects carry CSS custom properties like --member.
 type Vars = CSSProperties & Record<`--${string}`, string>;
@@ -22,9 +23,8 @@ type TeamCardProps = {
 };
 
 /**
- * One person on the About page: initials, name, role and profile links.
- * Every card carries the conic-gradient border that spins on hover; the
- * founder's card highlights the role badge in the brand green.
+ * Portrait team card: full-bleed photo with a progressive bottom frosted-glass
+ * blur, top-right social icons, and a bottom name/role overlay.
  */
 export default function TeamCard({ member }: TeamCardProps) {
   const isFounder = member.role === "Founder";
@@ -34,18 +34,20 @@ export default function TeamCard({ member }: TeamCardProps) {
       className={`glass card about-team-card${isFounder ? " about-team-card-founder" : ""}`}
       style={{ "--member": member.color } as Vars}
     >
-      <span className="about-team-initials" aria-hidden="true">
-        {initialsOf(member.name)}
-      </span>
-
-      <div className="about-team-id">
-        <h3 className="about-team-name">{member.name}</h3>
-        <p className="about-team-role">
-          <span className="about-team-role-dot" aria-hidden="true" />
-          {member.role}
-        </p>
+      <div className="about-team-media">
+        <Image
+          className="about-team-photo"
+          src={member.image}
+          alt={member.name}
+          fill
+          sizes="(max-width: 540px) 100vw, (max-width: 900px) 50vw, 280px"
+        />
       </div>
 
+      {/* Progressive frosted-glass blur over the bottom of the portrait */}
+      <div className="about-team-glass" aria-hidden="true" />
+
+      {/* Top-right GitHub & LinkedIn icons */}
       <ul className="about-team-socials" aria-label={`${member.name}'s profiles`}>
         {NETWORKS.map(({ key, label, Icon }) => (
           <li key={key}>
@@ -61,7 +63,15 @@ export default function TeamCard({ member }: TeamCardProps) {
           </li>
         ))}
       </ul>
+
+      {/* Bottom name & designation */}
+      <div className="about-team-id">
+        <h3 className="about-team-name">{member.name}</h3>
+        <p className="about-team-role">
+          <span className="about-team-role-dot" aria-hidden="true" />
+          {member.role}
+        </p>
+      </div>
     </li>
   );
 }
-

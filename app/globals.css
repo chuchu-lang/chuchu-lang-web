@@ -1613,12 +1613,6 @@ button {
 }
 
 /* Team */
-@property --border-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 200deg;
-}
-
 .about-team {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1628,79 +1622,109 @@ button {
   list-style: none;
 }
 .about-team-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: clamp(18px, 2.8vw, 28px);
+  position: relative;
+  aspect-ratio: 3 / 3.9;
   min-width: 0;
-  padding: clamp(20px, 2.8vw, 28px);
-  background:
-    linear-gradient(160deg, rgba(16, 178, 63, 0), transparent 55%),
-    var(--glass);
+  padding: 0;
+  border-radius: var(--r-lg);
+  background: var(--glass);
+  transition: none;
 }
-.about-team-card::before {
-  content: "";
+.about-team-card::after {
+  display: none;
+}
+
+/* Full-bleed portrait photo */
+.about-team-media {
   position: absolute;
   inset: 0;
-  padding: 1.5px;
+  z-index: 1;
+  overflow: hidden;
   border-radius: inherit;
-  background: conic-gradient(
-    from var(--border-angle),
-    #10b23f,
-    #fad705,
-    #fd8ab9,
-    #10b23f
+}
+.about-team-photo {
+  object-fit: cover;
+  object-position: center 10%;
+  transform: scale(1.02);
+}
+
+/* Progressive frosted-glass blur confined to the bottom zone of the card,
+   keeping the upper portrait/monogram completely sharp. */
+.about-team-glass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 46%;
+  z-index: 2;
+  border-radius: 0 0 var(--r-lg) var(--r-lg);
+  background: linear-gradient(
+    to top,
+    rgba(12, 22, 16, 0.68) 0%,
+    rgba(12, 22, 16, 0.34) 52%,
+    rgba(12, 22, 16, 0) 100%
   );
-  /* Keep only the padding ring: the content box is cut out. */
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box exclude,
-    linear-gradient(#000 0 0);
-  opacity: 0;
+  -webkit-backdrop-filter: blur(18px) saturate(165%);
+  backdrop-filter: blur(18px) saturate(165%);
+  -webkit-mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    #000 42%,
+    rgba(0, 0, 0, 0.65) 70%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    #000 42%,
+    rgba(0, 0, 0, 0.65) 70%,
+    transparent 100%
+  );
   pointer-events: none;
-  animation: team-border-spin 3.6s linear infinite;
-  animation-play-state: paused;
-  transition:
-    opacity 0.45s var(--ease),
-    padding 0.45s var(--ease),
-    filter 0.45s var(--ease);
 }
-.about-team-card:focus-within::before {
-  opacity: 1;
-  padding: 2.25px;
-  animation-play-state: running;
+.about-team-glass::before {
+  content: "";
+  position: absolute;
+  inset: -24% 0 0 0;
+  -webkit-backdrop-filter: blur(8px) saturate(135%);
+  backdrop-filter: blur(8px) saturate(135%);
+  -webkit-mask-image: linear-gradient(
+    to top,
+    #000 18%,
+    rgba(0, 0, 0, 0.4) 62%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to top,
+    #000 18%,
+    rgba(0, 0, 0, 0.4) 62%,
+    transparent 100%
+  );
 }
-.about-team-initials {
-  display: grid;
-  place-items: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
-  background: var(--member, var(--green));
-  font-family: var(--mono);
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--ink);
-  transition: transform 0.6s var(--ease);
-}
-/* Name and role read as one unit, tighter than the card's own gap. */
+
+/* Bottom padded content area sitting directly over the progressive glass blur */
 .about-team-id {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
+  padding: 24px 20px 20px;
 }
 .about-team-name {
   margin: 0;
   font-family: var(--display);
-  font-size: clamp(22px, 2vw, 28px);
-  font-weight: 650;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
+  font-size: clamp(21px, 1.85vw, 25px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  text-shadow: 0 2px 14px rgba(10, 18, 14, 0.45);
   overflow-wrap: anywhere;
 }
 .about-team-role {
@@ -1711,13 +1735,14 @@ button {
   margin: 0;
   padding: 0 12px 0 10px;
   border-radius: 999px;
-  background: rgba(20, 32, 26, 0.06);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 20px -8px rgba(10, 18, 14, 0.38);
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--ink);
 }
 .about-team-role-dot {
   display: block;
@@ -1736,13 +1761,15 @@ button {
   background: var(--accent);
 }
 
-/* Team profile links. Sit at the foot of the card, so the rows line up
-   across cards whatever the name length. Each button carries a brand
-   colour that slides up from below on hover, focus and press. */
+/* Top-right GitHub & LinkedIn buttons */
 .about-team-socials {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
   display: flex;
-  gap: 10px;
-  margin: auto 0 0;
+  gap: 8px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -1752,17 +1779,19 @@ button {
   position: relative;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   overflow: hidden;
   isolation: isolate;
-  border-radius: 14px;
+  border-radius: 13px;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.84);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    0 0 0 1px var(--hair),
-    0 8px 20px -10px rgba(20, 48, 30, 0.25);
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    0 0 0 1px rgba(20, 32, 26, 0.08),
+    0 10px 24px -10px rgba(14, 24, 18, 0.32);
   transition:
     transform 0.45s var(--ease),
     color 0.3s,
@@ -1784,8 +1813,8 @@ button {
 }
 .about-team-social-icon {
   display: block;
-  width: 20px;
-  height: 20px;
+  width: 19px;
+  height: 19px;
   transition: transform 0.45s var(--ease);
 }
 .about-team-social:focus-visible,
@@ -1805,34 +1834,16 @@ button {
 }
 @media (hover: hover) and (pointer: fine) {
   .about-team-card:hover {
-    background:
-      linear-gradient(160deg, rgba(16, 178, 63, 0.09), transparent 55%),
-      var(--glass);
+    transform: translateZ(0);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.95),
-      0 0 0 1px rgba(16, 178, 63, 0.22),
-      0 44px 80px -28px rgba(16, 122, 59, 0.36),
-      0 10px 28px -10px rgba(253, 138, 185, 0.22);
+      0 0 0 1px rgba(20, 48, 30, 0.05),
+      0 34px 64px -28px rgba(20, 48, 30, 0.28),
+      0 4px 14px -6px rgba(20, 48, 30, 0.1);
   }
-  .about-team-card:hover::before {
-    opacity: 1;
-    padding: 2.25px;
-    filter: saturate(1.15);
-    animation-play-state: running;
-  }
-  .about-team-card:hover .about-team-initials {
-    transform: rotate(-6deg) scale(1.06);
-  }
-  /* The buttons rise one after the other as the card lifts. */
-  .about-team-card:hover .about-team-social {
-    transform: translateY(-2px);
-  }
-  .about-team-card:hover li + li .about-team-social {
-    transition-delay: 0.06s;
-  }
-  .about-team-card .about-team-social:hover {
+  .about-team-social:hover {
     color: #fff;
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.2),
       0 0 0 1px transparent,
@@ -1841,13 +1852,10 @@ button {
   .about-team-social:hover::before {
     transform: none;
   }
-  .about-team-card:hover li .about-team-social:hover {
-    transition-delay: 0s;
-  }
   .about-team-social:hover .about-team-social-icon {
     transform: scale(1.12) rotate(-8deg);
   }
-  .about-team-card .about-team-social:active {
+  .about-team-social:active {
     transform: translateY(-1px) scale(0.94);
   }
 }
@@ -1980,11 +1988,6 @@ button {
 @keyframes spin {
   to {
     transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-@keyframes team-border-spin {
-  to {
-    --border-angle: 560deg;
   }
 }
 @keyframes panelin {
