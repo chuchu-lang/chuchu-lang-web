@@ -14,6 +14,7 @@ export type ProfileNetwork = "github" | "linkedin";
 export type TeamMember = {
   name: string;
   role: TeamRole;
+  tagline: string;
   /** Brand colour for the member's role dot. */
   color: string;
   /** Portrait path under `public/`. */
@@ -24,6 +25,7 @@ export type TeamMember = {
 export const TEAM = [
   {
     name: "Nouman Ejaz",
+    tagline: "Turning a language idea into native code.",
     role: "Founder",
     color: "#10B23F",
     image: "/team/nouman-ejaz.jpg",
@@ -34,6 +36,7 @@ export const TEAM = [
   },
   {
     name: "Abdul Sammad",
+    tagline: "Making complex ideas feel simple.",
     role: "Co-founder",
     color: "#FAD705",
     image: "/team/abdul-sammad-bw-white.png",
@@ -44,6 +47,7 @@ export const TEAM = [
   },
   {
     name: "Arslan Amjad",
+    tagline: "Curiosity in every line of code.",
     role: "Co-founder",
     color: "#FD8AB9",
     image: "/team/arslan-amjad.jpg",
@@ -54,6 +58,7 @@ export const TEAM = [
   },
   {
     name: "Ammar Baig",
+    tagline: "Building what comes next, together.",
     role: "Co-founder",
     color: "#A7B8FF",
     image: "/team/ammar-baig-bw-white.png",

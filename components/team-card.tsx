@@ -22,16 +22,13 @@ type TeamCardProps = {
   member: TeamMember;
 };
 
-/**
- * Portrait team card: full-bleed photo with a progressive bottom frosted-glass
- * blur, top-right social icons, and a bottom name/role overlay.
- */
+/** Portrait card with a frosted identity panel and direct profile links. */
 export default function TeamCard({ member }: TeamCardProps) {
   const isFounder = member.role === "Founder";
 
   return (
     <li
-      className={`glass card about-team-card${isFounder ? " about-team-card-founder" : ""}`}
+      className={`about-team-card${isFounder ? " about-team-card-founder" : ""}`}
       style={{ "--member": member.color } as Vars}
     >
       <div className="about-team-media">
@@ -44,33 +41,38 @@ export default function TeamCard({ member }: TeamCardProps) {
         />
       </div>
 
-      {/* Progressive frosted-glass blur over the bottom of the portrait */}
-      <div className="about-team-glass" aria-hidden="true" />
+      <div className="about-team-details">
+        <div className="about-team-id">
+          <h3 className="about-team-name">
+            <span>{member.name}</span>
+            <svg className="about-team-check" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="m16 1 4 2.6 4.8.5 1.5 4.6 3.6 3.3-1 4.8 1 4.8-3.6 3.3-1.5 4.6-4.8.5L16 32l-4-2.6-4.8-.5-1.5-4.6-3.6-3.3 1-4.8-1-4.8 3.6-3.3 1.5-4.6 4.8-.5Z" />
+              <path d="m10.5 16 3.5 3.5 7.5-7.5" fill="none" stroke="#103d1a" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </h3>
+          <p className="about-team-role">
+            <span className="about-team-role-dot" aria-hidden="true" />
+            {member.role}
+          </p>
+          <p className="about-team-tagline">{member.tagline}</p>
+        </div>
 
-      {/* Top-right GitHub & LinkedIn icons */}
-      <ul className="about-team-socials" aria-label={`${member.name}'s profiles`}>
-        {NETWORKS.map(({ key, label, Icon }) => (
-          <li key={key}>
-            <a
-              className={`about-team-social about-team-social-${key}`}
-              href={member.profiles[key]}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${member.name} on ${label} (opens in a new tab)`}
-            >
-              <Icon className="about-team-social-icon" />
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      {/* Bottom name & designation */}
-      <div className="about-team-id">
-        <h3 className="about-team-name">{member.name}</h3>
-        <p className="about-team-role">
-          <span className="about-team-role-dot" aria-hidden="true" />
-          {member.role}
-        </p>
+        <ul className="about-team-socials" aria-label={`${member.name}'s profiles`}>
+          {NETWORKS.map(({ key, label, Icon }) => (
+            <li key={key}>
+              <a
+                className={`about-team-social about-team-social-${key}`}
+                href={member.profiles[key]}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${member.name} on ${label} (opens in a new tab)`}
+              >
+                <Icon className="about-team-social-icon" />
+                <span>{label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </li>
   );
