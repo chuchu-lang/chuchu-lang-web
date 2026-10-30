@@ -1952,22 +1952,22 @@ button {
   0%,
   6% {
     width: 0;
-    animation-timing-function: steps(10, end);
+    animation-timing-function: steps(13, end);
   }
   13%,
   100% {
-    width: 10ch;
+    width: 13ch;
   }
 }
 @keyframes t2 {
   0%,
   14% {
     width: 0;
-    animation-timing-function: steps(12, end);
+    animation-timing-function: steps(15, end);
   }
   24%,
   100% {
-    width: 12ch;
+    width: 15ch;
   }
 }
 @keyframes t3 {
