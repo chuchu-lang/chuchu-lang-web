@@ -1613,6 +1613,9 @@ button {
 }
 
 /* Team: sharp portraits with a progressive frosted-glass identity panel. */
+.about-team-section {
+  max-width: 1320px;
+}
 .about-team {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1672,7 +1675,7 @@ button {
 }
 .about-team-id {
   min-width: 0;
-  padding: 0 0 22px;
+  padding: 0 0 12px;
 }
 .about-team-name {
   display: flex;
@@ -1733,7 +1736,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  min-height: 44px;
+  min-height: 32px;
   padding: 0 8px;
   border: 1px solid rgba(20, 32, 26, 0.055);
   border-radius: 999px;

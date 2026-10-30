@@ -420,7 +420,7 @@ export default function AboutPage() {
       </section>
 
       {/* TEAM */}
-      <section className="wrap about-section" aria-labelledby="team-title">
+      <section className="wrap about-section about-team-section" aria-labelledby="team-title">
         <p className="eyebrow">
           <b />
           06 &middot; THE TEAM
