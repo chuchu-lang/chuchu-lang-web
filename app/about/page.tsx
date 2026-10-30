@@ -111,25 +111,27 @@ const FACTS = [
 ];
 
 const IMPLEMENTED = [
+  "Line and block comments with colored annotations in the docs",
   "Inferred local variables with typed reassignment",
   "Signed integers, floats, booleans and homogeneous fixed-size numeric arrays",
   "Arithmetic, comparisons, grouping and unary negation",
   "if / else, while, lexical scope and block shadowing",
   "Top-level typed functions, forward calls, recursion and mutual recursion",
   "Numerical built-ins: abs, sqrt, min, max, sum, len",
-  "Scalar output through show",
+  "Scalar and string output through show",
+  "input() returns text directly; try_input() supports explicit error recovery",
   "Native object emission and executable linking",
   "O0–O3 optimisation, CPU selection, timing JSON, IR and assembly output",
   "Runtime checks for integer arithmetic, division and array bounds",
 ];
 
 const LIMITS = [
-  "No strings, characters or comments yet",
+  "No character literals",
   "No for, break, continue or logical operators",
   "No imports, user-defined types or file I/O",
   "Arrays are 1–256 elements and cannot be assigned element by element",
   "Function annotations cover scalars only",
-  "No language-level input API, JIT or automatic parallelism",
+  "No JIT or automatic parallelism",
   "Host-native only — there is no cross-OS target flag",
 ];
 
@@ -237,9 +239,14 @@ export default function AboutPage() {
               </div>
               <pre className="about-code-body">
                 <code>
-                  <span className="kw">assign</span> greeting <span className="kw">as</span> 42
+                  <span className="comment-note">{"//NOTE: Functions declare return types with be."}</span>
                   {"\n"}
-                  <span className="kw">show</span> greeting
+                  <span className="kw">function</span>{" greet(name: string) "}
+                  <span className="kw">be</span>{" string {\n  "}
+                  <span className="kw">assign</span>{" prefix "}
+                  <span className="kw">as</span>{' "Hello, "\n  '}
+                  <span className="kw">return</span>{' prefix + name + "!"\n}\n'}
+                  <span className="kw">show</span>{' greet("دنیا 🌍")'}
                 </code>
               </pre>
               <div className="about-code-out">

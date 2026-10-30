@@ -2214,3 +2214,11 @@ button {
     stroke-dashoffset: 0;
   }
 }
+
+.about-code-body .comment-note { color: #93c5fd; }
+
+.features .about-code-out { white-space: pre-wrap; }
+.input-docs { color: var(--accent); font-size: 14px; font-weight: 600; }
+.input-docs:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.about-code-body .kw { color: #86efac; }

@@ -381,6 +381,38 @@ export default function Home() {
                 ))}
               </div>
             </article>
+            <article className="glass card b7 feature">
+              <p className="feature-label">INTERACTIVE INPUT</p>
+              <h3 className="feature-title">Read a line of text</h3>
+              <p className="feature-text">
+                <code>input()</code> returns a string you can use directly. Pass
+                a prompt to keep it on the same line as the text you enter.
+              </p>
+              <div className="about-code">
+                <pre className="about-code-body"><code>
+                  <span className="kw">assign</span>{" name "}
+                  <span className="kw">as</span>{' input("Your name: ")\n'}
+                  <span className="kw">show</span>{' "Hello, " + name + "!"'}
+                </code></pre>
+                <div className="about-code-out">{"Your name: دنیا 🌍\nHello, دنیا 🌍!"}</div>
+              </div>
+            </article>
+            <article className="glass card b5 feature">
+              <p className="feature-label">ERROR HANDLING</p>
+              <h3 className="feature-title">Choose when to recover</h3>
+              <p className="feature-text">
+                <code>input()</code> stops with a runtime diagnostic on EOF or a
+                read failure. Use <code>try_input()</code> when your program
+                should handle those outcomes itself.
+              </p>
+              <p className="feature-text">
+                It accepts the same optional prompt and returns a result you
+                can inspect with <code>is_ok</code> and <code>is_eof</code>.
+              </p>
+              <a className="input-docs" href={`${docsUrl}/docs/language/input-results/`}>
+                Read the input guide <span aria-hidden="true">&rarr;</span>
+              </a>
+            </article>
           </div>
         </div>
       </section>
