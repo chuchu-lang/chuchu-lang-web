@@ -11,7 +11,7 @@ export default async function Image() {
     (
       <OgCard
         eyebrow="THE CHUCHU PROGRAMMING LANGUAGE"
-        title={["Simple syntax.", "Native possibilities."]}
+        title={["Simple syntax.", "Serious performance."]}
         description="A high-performance, statically typed language with inferred types. Its Rust compiler, Cheeku, turns your code into native programs through LLVM."
         pills={["Static types", "Type inference", "Native binaries"]}
         code={{

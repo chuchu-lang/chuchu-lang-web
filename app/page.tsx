@@ -4,7 +4,9 @@ import HowItWorks from "@/components/how-it-works";
 import OptimizationLevels from "@/components/optimization-levels";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
+import VSCodeExtension from "@/components/vscode-extension";
 import { JsonLd } from "@/lib/json-ld";
+import FeaturedVideo from "@/components/featured-video";
 import { projectStructuredData } from "@/lib/structured-data";
 
 const docsUrl = "https://docs.chuchu-lang.org";
@@ -100,7 +102,7 @@ export default function Home() {
             <span>Simple syntax.</span>
             <span className="accent">
               <span className="uline">
-                Native
+                Serious
                 <svg
                   className="sq"
                   viewBox="0 0 240 14"
@@ -113,7 +115,7 @@ export default function Home() {
                   />
                 </svg>
               </span>{" "}
-              possibilities.
+              performance.
             </span>
           </h1>
           <p className="rise hero-text" style={{ "--d": ".28s" } as Vars}>
@@ -130,6 +132,9 @@ export default function Home() {
             </a>
             <a className="btn btn-glass" href={sourceUrl}>
               View on GitHub
+            </a>
+            <a className="btn btn-glass" href="#watch">
+              Watch the video <span className="arr" aria-hidden="true">&rarr;</span>
             </a>
           </div>
           <p className="rise hero-note" style={{ "--d": ".5s" } as Vars}>
@@ -245,6 +250,8 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      <FeaturedVideo />
 
       {/* HOW IT WORKS */}
       <section id="how-it-works" className="how" aria-labelledby="how-title">
@@ -416,6 +423,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <VSCodeExtension number="03" />
 
       {/* CTA */}
       <section className="wrap cta" aria-labelledby="cta-title">

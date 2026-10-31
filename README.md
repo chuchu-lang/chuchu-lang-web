@@ -6,7 +6,9 @@ code into native programs through LLVM.
 
 This repository is only the marketing site. The documentation lives at
 [docs.chuchu-lang.org](https://docs.chuchu-lang.org) and the compiler source at
-[chuchu-lang/chuchu-core](https://github.com/chuchu-lang/chuchu-core).
+[chuchu-lang/chuchu-core](https://github.com/chuchu-lang/chuchu-core). The
+[VS Code extension](https://github.com/chuchu-lang/chuchu-vscode) is featured on
+the homepage and downloads page, with setup instructions in the docs.
 
 ## Stack
 
@@ -61,6 +63,8 @@ enable Google Analytics. Without it, no analytics script is loaded.
 
 - `app/page.tsx`: the homepage (server component)
 - `app/about/page.tsx`: the About page (server component)
+- `components/featured-video.tsx`: responsive YouTube player on the homepage
+- `components/vscode-extension.tsx`: shared VS Code extension section
 - `components/how-it-works.tsx`: the six-stage compiler stepper (client)
 - `components/optimization-levels.tsx`: the -O0 to -O3 selector (client)
 - `components/site-nav.tsx`, `components/site-footer.tsx`: shared chrome

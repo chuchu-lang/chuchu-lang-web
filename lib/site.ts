@@ -28,7 +28,7 @@ export const site = {
   name: "Chuchu",
   /** Used as the `title.template` suffix on every page except the home page. */
   titleTemplate: "%s · Chuchu",
-  tagline: "Simple syntax. Native possibilities.",
+  tagline: "Simple syntax. Serious performance.",
   description:
     "Chuchu is a high-performance, statically typed programming language with automatic type inference. Its Rust compiler, Cheeku, turns .chuchu source files into native executables through LLVM.",
   url: SITE_URL,
@@ -43,6 +43,9 @@ export const site = {
   },
   links: {
     docs: "https://docs.chuchu-lang.org",
+    featuredVideo: "https://www.youtube.com/watch?v=uy0qCOG_LGI",
+    youtube: "https://www.youtube.com/@Chuchu-Lang",
+    linkedin: "https://www.linkedin.com/company/chuchu-lang",
     install: "https://docs.chuchu-lang.org/docs/getting-started/installation/",
     source: "https://github.com/chuchu-lang/chuchu-core",
     issues: "https://github.com/chuchu-lang/chuchu-core/issues",
@@ -50,6 +53,8 @@ export const site = {
     pulls: "https://github.com/chuchu-lang/chuchu-core/pulls",
     releases: "https://github.com/chuchu-lang/chuchu-core/releases",
     docsSource: "https://github.com/chuchu-lang/chuchu-lang-docs",
+    vscodeSource: "https://github.com/chuchu-lang/chuchu-vscode",
+    vscodeGuide: "https://docs.chuchu-lang.org/docs/tooling/vscode/",
     webSource: "https://github.com/chuchu-lang/chuchu-lang-web",
   },
 } as const;
@@ -77,4 +82,5 @@ export const siteKeywords = [
   "Chuchu community",
   "contribute to Chuchu",
   "open source compiler",
+  "Chuchu VS Code extension",
 ] as const;

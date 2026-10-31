@@ -11,7 +11,7 @@ type Vars = CSSProperties & Record<`--${string}`, string>;
 
 const TITLE = "Chuchu community";
 const DESCRIPTION =
-  "Join the open-source Chuchu community: report issues, propose changes and contribute to the high-performance Chuchu language, the Cheeku compiler, the docs and this site.";
+  "Join the open-source Chuchu community: report issues, propose changes and contribute to the high-performance Chuchu language, the Cheeku compiler, the VS Code extension, the docs and this site.";
 
 export const metadata: Metadata = {
   title: "Community",
@@ -43,7 +43,7 @@ const CHANNELS = [
   {
     label: "CODE",
     title: "Pull requests",
-    text: "Propose a change to the language, the compiler, the docs or the website. Reviewed, tested work is merged into main.",
+    text: "Propose a change to the language, the compiler, the VS Code extension, the docs or the website. Reviewed, tested work is merged into main.",
     cta: "Browse pull requests",
     href: site.links.pulls,
     color: "#FAD705",
@@ -70,6 +70,11 @@ const REPOSITORIES = [
     href: site.links.docsSource,
   },
   {
+    name: "chuchu-vscode",
+    text: "The VS Code extension: highlighting, completions, navigation and Cheeku build commands.",
+    href: site.links.vscodeSource,
+  },
+  {
     name: "chuchu-lang-web",
     text: "This website, built with Next.js.",
     href: site.links.webSource,
@@ -90,7 +95,7 @@ const STEPS = [
   {
     n: "03",
     title: "Run the checks",
-    text: "Formatting, tests and warnings-denied Clippy must pass before you open a pull request.",
+    text: "Follow the checks in the repository you are changing. Compiler work requires formatting, tests and warnings-denied Clippy; the extension has its own editor tests.",
   },
   {
     n: "04",
@@ -188,6 +193,30 @@ export default function CommunityPage() {
         </div>
       </section>
 
+      <section className="wrap about-section" aria-labelledby="follow-title">
+        <p className="eyebrow"><b /> FOLLOW CHUCHU</p>
+        <h2 id="follow-title" className="h2 about-h2">Stay in the loop</h2>
+        <div className="bento">
+          <article className="glass card b6 about-card">
+            <p className="feature-label">WATCH</p>
+            <h3 className="about-card-title">Chuchu on YouTube</h3>
+            <p className="feature-text">Watch Chuchu videos and follow the channel.</p>
+            <div className="about-actions">
+              <a className="btn btn-primary" href={site.links.featuredVideo}>Watch the video</a>
+              <a className="btn btn-glass" href={site.links.youtube}>Visit the channel</a>
+            </div>
+          </article>
+          <article className="glass card b6 about-card">
+            <p className="feature-label">FOLLOW</p>
+            <h3 className="about-card-title">Chuchu on LinkedIn</h3>
+            <p className="feature-text">Follow the Chuchu company page for project updates.</p>
+            <div className="about-actions">
+              <a className="btn btn-glass" href={site.links.linkedin}>Follow on LinkedIn</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
       {/* REPOSITORIES */}
       <section className="wrap about-section" aria-labelledby="repos-title">
         <p className="eyebrow">
@@ -199,7 +228,7 @@ export default function CommunityPage() {
         </h2>
         <div className="bento">
           {REPOSITORIES.map((repo) => (
-            <article key={repo.name} className="glass card b4 about-card">
+            <article key={repo.name} className="glass card b6 about-card">
               <h3 className="about-card-title">{repo.name}</h3>
               <p className="feature-text">{repo.text}</p>
               <p>
@@ -235,7 +264,7 @@ export default function CommunityPage() {
 
         <div className="glass about-terminal">
           <div className="about-terminal-bar">
-            <span>BEFORE YOU OPEN A PULL REQUEST</span>
+            <span>COMPILER CHECKS BEFORE A PULL REQUEST</span>
           </div>
           <pre className="about-terminal-body">
             <code>

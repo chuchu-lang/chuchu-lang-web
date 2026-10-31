@@ -35,8 +35,17 @@ export default function SiteFooter() {
           <a className="navlink" href={site.links.docs}>
             Documentation
           </a>
+          <a className="navlink" href={site.links.vscodeGuide}>
+            VS Code
+          </a>
           <a className="navlink" href={site.links.source}>
             GitHub
+          </a>
+          <a className="navlink" href={site.links.youtube}>
+            YouTube
+          </a>
+          <a className="navlink" href={site.links.linkedin}>
+            LinkedIn
           </a>
         </nav>
       </footer>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
+import VSCodeExtension from "@/components/vscode-extension";
 import { JsonLd } from "@/lib/json-ld";
 import { site } from "@/lib/site";
 import { downloadsStructuredData } from "@/lib/structured-data";
@@ -9,9 +10,9 @@ import { downloadsStructuredData } from "@/lib/structured-data";
 // Lets style objects carry CSS custom properties like --d.
 type Vars = CSSProperties & Record<`--${string}`, string>;
 
-const TITLE = "Download Cheeku, the Chuchu compiler";
+const TITLE = "Chuchu downloads: Cheeku and the VS Code extension";
 const DESCRIPTION =
-  "Get Cheeku, the compiler for the high-performance Chuchu language: native archives for macOS, Linux and Windows, what each one needs, and how to build from source.";
+  "Build Cheeku from source and set up the Chuchu VS Code extension. Find compiler toolchain requirements, planned native archives, and VSIX installation instructions.";
 
 export const metadata: Metadata = {
   title: "Downloads",
@@ -90,16 +91,16 @@ export default function DownloadsPage() {
       <section className="wrap about-hero" aria-labelledby="downloads-title">
         <p className="glass rise hero-badge" style={{ "--d": ".05s" } as Vars}>
           <span className="ping" aria-hidden="true" />
-          Downloads &middot; Native compiler &middot; MIT licensed
+          Downloads &middot; Compiler &amp; editor tools
         </p>
         <h1 id="downloads-title" className="rise about-title" style={{ "--d": ".12s" } as Vars}>
-          <span>Get Cheeku, the</span>
-          <span className="accent">Chuchu compiler.</span>
+          <span>The language.</span>
+          <span className="accent">The tools to write it.</span>
         </h1>
         <p className="rise about-lede" style={{ "--d": ".22s" } as Vars}>
           Cheeku turns .chuchu source files into fast native executables
-          through LLVM. It ships as one native archive per platform, and it is
-          not a standalone SDK: LLVM and a C toolchain come from their vendors.
+          through LLVM. Build the compiler from source and add the Chuchu
+          extension to VS Code for editing, navigation and build commands.
         </p>
         <div className="rise about-actions" style={{ "--d": ".32s" } as Vars}>
           <a className="btn btn-primary" href={site.links.install}>
@@ -107,6 +108,9 @@ export default function DownloadsPage() {
             <span className="arr" aria-hidden="true">
               &rarr;
             </span>
+          </a>
+          <a className="btn btn-glass" href="#vscode">
+            VS Code extension
           </a>
           <a className="btn btn-glass" href={site.links.releases}>
             GitHub Releases
@@ -194,11 +198,13 @@ export default function DownloadsPage() {
         </div>
       </section>
 
+      <VSCodeExtension number="03" />
+
       {/* NOTES */}
       <section className="wrap about-section" aria-labelledby="notes-title">
         <p className="eyebrow">
           <b />
-          03 &middot; GOOD TO KNOW
+          04 &middot; GOOD TO KNOW
         </p>
         <h2 id="notes-title" className="h2 about-h2">
           Before you install

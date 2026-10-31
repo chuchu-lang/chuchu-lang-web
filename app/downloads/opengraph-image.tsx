@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { ogFonts, OgCard, ogImageSize } from "@/lib/og";
 
 export const alt =
-  "Download Cheeku, the compiler for the high-performance Chuchu language, for macOS, Linux and Windows.";
+  "Chuchu downloads: build the Cheeku compiler and set up the VS Code extension.";
 export const size = ogImageSize;
 export const contentType = "image/png";
 
@@ -11,9 +11,9 @@ export default async function Image() {
     (
       <OgCard
         eyebrow="DOWNLOADS"
-        title={["Get Cheeku, the", "Chuchu compiler."]}
-        description="Native archives for macOS, Linux and Windows, or build Cheeku from source with Rust and LLVM."
-        pills={["macOS", "Linux", "Windows"]}
+        title={["The language.", "The tools to write it."]}
+        description="Build Cheeku from source. Write, explore and compile Chuchu in VS Code."
+        pills={["Cheeku", "VS Code", "Open source"]}
       />
     ),
     {

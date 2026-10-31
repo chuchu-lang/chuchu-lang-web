@@ -47,7 +47,10 @@ export function siteStructuredData() {
         sameAs: [
           site.links.source,
           site.links.docsSource,
+          site.links.vscodeSource,
           site.links.webSource,
+          site.links.youtube,
+          site.links.linkedin,
         ],
       },
     ],
@@ -155,7 +158,7 @@ export function communityStructuredData() {
     url: absoluteUrl("/community"),
     name: "Chuchu community",
     description:
-      "Join the open-source Chuchu community: report issues, propose changes and contribute to the language, the Cheeku compiler, the docs and this site.",
+      "Join the open-source Chuchu community: report issues, propose changes and contribute to the language, the Cheeku compiler, the VS Code extension, the docs and this site.",
     inLanguage: site.language,
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": LANGUAGE_ID },
@@ -163,16 +166,16 @@ export function communityStructuredData() {
   };
 }
 
-/** The Downloads route, describing the Cheeku compiler as downloadable software. */
+/** Compiler and editor setup on the Downloads route. */
 export function downloadsStructuredData() {
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": `${absoluteUrl("/downloads")}#webpage`,
     url: absoluteUrl("/downloads"),
-    name: "Download Cheeku, the Chuchu compiler",
+    name: "Chuchu downloads: Cheeku and the VS Code extension",
     description:
-      "How to get Cheeku, the Chuchu compiler: native archives for macOS, Linux and Windows, their requirements, and how to build from source.",
+      "Build Cheeku from source and set up the Chuchu VS Code extension. Find compiler toolchain requirements, planned native archives, and VSIX installation instructions.",
     inLanguage: site.language,
     isPartOf: { "@id": WEBSITE_ID },
     mainEntity: { "@id": COMPILER_ID },
