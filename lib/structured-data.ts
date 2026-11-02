@@ -97,7 +97,7 @@ export function projectStructuredData() {
         programmingLanguage: { "@type": "ComputerLanguage", name: "Rust" },
         codeRepository: site.links.source,
         license: "https://opensource.org/license/mit",
-        downloadUrl: site.links.releases,
+        downloadUrl: absoluteUrl("/download"),
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
         author: { "@id": ORGANIZATION_ID },
       },
@@ -187,3 +187,32 @@ export function blogPostStructuredData(post: BlogPost) {
   };
 }
 
+
+/** Compiler and editor setup on the Downloads route. */
+export function downloadsStructuredData() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${absoluteUrl("/download")}#webpage`,
+    url: absoluteUrl("/download"),
+    name: "Chuchu downloads: Cheeku and the VS Code extension",
+    description:
+      "Build Cheeku from source and set up the Chuchu VS Code extension. Find compiler toolchain requirements, planned native archives, and VSIX installation instructions.",
+    inLanguage: site.language,
+    isPartOf: { "@id": WEBSITE_ID },
+    mainEntity: { "@id": COMPILER_ID },
+    about: { "@id": COMPILER_ID },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Downloads",
+          item: absoluteUrl("/download"),
+        },
+      ],
+    },
+  };
+}

@@ -19,6 +19,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: absoluteUrl("/download"),
+      // Fixed value: new Date() is not allowed here with cacheComponents enabled.
+      lastModified: "2026-10-29",
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: absoluteUrl("/blogs"),
       // Tracks the newest post instead of using new Date(), which
       // cacheComponents does not allow here.

@@ -8,7 +8,7 @@ This repository is only the marketing site. The documentation lives at
 [docs.chuchu-lang.org](https://docs.chuchu-lang.org) and the compiler source at
 [chuchu-lang/chuchu-core](https://github.com/chuchu-lang/chuchu-core). The
 [VS Code extension](https://github.com/chuchu-lang/chuchu-vscode) is featured on
-the homepage, with setup instructions in the docs.
+the homepage and downloads page, with setup instructions in the docs.
 
 ## Stack
 

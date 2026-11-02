@@ -8,7 +8,7 @@ const LOGO_RATIO = 586 / 976;
 
 type SiteNavProps = {
   /** Marks the active section for assistive technology. */
-  current?: "home" | "about" | "blogs";
+  current?: "home" | "about" | "blogs" | "downloads";
 };
 
 /**
@@ -20,6 +20,7 @@ export default function SiteNav({ current }: SiteNavProps) {
     { label: "About", href: "/about", current: current === "about" },
     { label: "Blog", href: "/blogs", current: current === "blogs" },
     { label: "Documentation", href: site.links.docs, external: true },
+    { label: "Downloads", href: "/download", current: current === "downloads" },
     { label: "GitHub", href: site.links.source, external: true },
   ];
   return (
@@ -53,6 +54,13 @@ export default function SiteNav({ current }: SiteNavProps) {
         <a className="navlink" href={site.links.docs}>
           Documentation
         </a>
+        <Link
+          className="navlink"
+          href="/download"
+          aria-current={current === "downloads" ? "page" : undefined}
+        >
+          Downloads
+        </Link>
         <a className="navlink" href={site.links.source}>
           GitHub
         </a>
