@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import ThemeToggle from "@/components/theme-toggle";
 
 export type MobileNavItem = {
   label: string;
@@ -15,6 +16,8 @@ type MobileNavProps = {
   items: MobileNavItem[];
   /** Target of the "Get started" button, in the bar and in the menu. */
   installHref: string;
+  /** Optional theme toggle control rendered in .navend for desktop and mobile. */
+  themeToggle?: ReactNode;
   /** Static bar content: the brand and the inline desktop links. */
   children: ReactNode;
 };
@@ -29,7 +32,12 @@ const DESKTOP_QUERY = "(min-width: 900px)";
  * Closes on link selection, Escape, any outside press and when the viewport
  * grows past the breakpoint; locks page scroll while open.
  */
-export default function MobileNav({ items, installHref, children }: MobileNavProps) {
+export default function MobileNav({
+  items,
+  installHref,
+  themeToggle,
+  children,
+}: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const button = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
@@ -79,6 +87,7 @@ export default function MobileNav({ items, installHref, children }: MobileNavPro
       <div className="glass navpill">
         {children}
         <div className="navend">
+          {themeToggle ?? <ThemeToggle />}
           <a className="btn btn-primary btn-nav" href={installHref}>
             Get started{" "}
             <span className="arr" aria-hidden="true">

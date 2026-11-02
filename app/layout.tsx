@@ -86,16 +86,25 @@ export const viewport: Viewport = {
   // Lets the page draw under notches; the nav and footer pad with
   // env(safe-area-inset-*) so nothing ends up behind them.
   viewportFit: "cover",
-  themeColor: "#10B23F",
-  colorScheme: "light",
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#10B23F" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a120d" },
+  ],
 };
+
+const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem("chuchu-theme");var d=window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.dataset.theme=s==="dark"||s==="light"?s:d?"dark":"light";}catch(e){document.documentElement.dataset.theme=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";}})();`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${bricolage.variable} ${geist.variable} ${geistMono.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body>
         <JsonLd data={siteStructuredData()} />
         {children}

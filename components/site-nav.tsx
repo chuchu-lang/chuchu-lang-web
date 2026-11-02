@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import MobileNav, { type MobileNavItem } from "@/components/mobile-nav";
+import ThemeToggle from "@/components/theme-toggle";
 import { site } from "@/lib/site";
 
 // Logo intrinsic size from public/chuchu-logo-3.svg (976 x 586).
@@ -24,7 +25,11 @@ export default function SiteNav({ current }: SiteNavProps) {
     { label: "GitHub", href: site.links.source, external: true },
   ];
   return (
-    <MobileNav items={mobileItems} installHref={site.links.install}>
+    <MobileNav
+      items={mobileItems}
+      installHref={site.links.install}
+      themeToggle={<ThemeToggle />}
+    >
       <Link className="brand" href="/" aria-label="Chuchu home">
         <Image
           className="brand-logo"
