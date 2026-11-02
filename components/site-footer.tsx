@@ -29,12 +29,6 @@ export default function SiteFooter() {
           <Link className="navlink" href="/blogs">
             Blog
           </Link>
-          <Link className="navlink" href="/community">
-            Community
-          </Link>
-          <Link className="navlink" href="/downloads">
-            Downloads
-          </Link>
           <a className="navlink" href={site.links.docs}>
             Documentation
           </a>
