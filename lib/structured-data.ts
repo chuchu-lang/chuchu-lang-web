@@ -1,3 +1,4 @@
+import { POSTS, type BlogPost } from "./blog";
 import { absoluteUrl, SITE_URL, site } from "./site";
 import { TEAM } from "./team";
 
@@ -163,6 +164,54 @@ export function communityStructuredData() {
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": LANGUAGE_ID },
     breadcrumb: breadcrumb("Community", "/community"),
+  };
+}
+
+/** The blog index, listing every published post. */
+export function blogStructuredData() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${absoluteUrl("/blogs")}#blog`,
+    url: absoluteUrl("/blogs"),
+    name: "Chuchu blog",
+    description:
+      "Notes from the Chuchu team about the language, the Cheeku compiler, performance and tooling.",
+    inLanguage: site.language,
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": LANGUAGE_ID },
+    publisher: { "@id": ORGANIZATION_ID },
+    blogPost: POSTS.map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.excerpt,
+      url: absoluteUrl(`/blogs/${post.slug}`),
+      datePublished: post.date,
+      author: { "@type": "Organization", name: post.author },
+    })),
+  };
+}
+
+/** A single blog post, linked back to the blog index. */
+export function blogPostStructuredData(post: BlogPost) {
+  const url = absoluteUrl(`/blogs/${post.slug}`);
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${url}#post`,
+    url,
+    mainEntityOfPage: url,
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    dateModified: post.date,
+    inLanguage: site.language,
+    keywords: post.tags.join(", "),
+    articleSection: post.category,
+    author: { "@type": "Organization", name: post.author },
+    publisher: { "@id": ORGANIZATION_ID },
+    isPartOf: { "@id": `${absoluteUrl("/blogs")}#blog` },
+    about: { "@id": LANGUAGE_ID },
   };
 }
 
