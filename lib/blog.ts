@@ -380,6 +380,57 @@ python3 benchmarks/run.py \\
       },
     ],
   },
+  {
+    slug: "arrays-without-surprises",
+    title: "Arrays without surprises",
+    excerpt:
+      "Fixed size, homogeneous and checked. Chuchu arrays keep element-wise arithmetic simple and make an out-of-range index a real error.",
+    date: "2026-09-17",
+    category: "Language",
+    readingTime: 5,
+    author: "Chuchu team",
+    tags: ["Arrays", "Runtime checks", "Language"],
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Chuchu arrays are deliberately small and predictable. They have a fixed size, one element type and checked bounds. There is no resizing, no sparse storage and no mixed-type list hiding behind the same syntax.",
+      },
+      {
+        type: "code",
+        language: "chuchu",
+        filename: "arrays.chuchu",
+        code: `set a to [1, 2, 3]
+set b to [4, 5, 6]
+set result to a * b
+
+show sum(result)
+show len(result)`,
+      },
+      { type: "heading", text: "Fixed size, checked access" },
+      {
+        type: "paragraph",
+        text: "An array holds between 1 and 256 elements, and its length is known at compile time. Indexing is checked at runtime: an index outside the array stops the program with a clear error rather than reading whatever happens to be next in memory. Elements cannot be assigned one by one yet, so an array is built once and then read or transformed as a whole.",
+      },
+      { type: "heading", text: "Element-wise arithmetic" },
+      {
+        type: "paragraph",
+        text: "Arithmetic between two arrays of the same length applies element by element. The result has the same length and element type. sum reduces an array in its original order, and floating-point reductions keep that order instead of silently reassociating the values.",
+      },
+      {
+        type: "quote",
+        text: "Checked evaluation order is part of the language, not an optimisation detail. Reordering a reduction can change which overflow happens first.",
+      },
+      { type: "heading", text: "Why keep it small" },
+      {
+        type: "paragraph",
+        text: "A small array model makes the semantics easy to state and easy to test: no hidden allocations, no capacity growth and no aliasing surprises. It is enough for the numerical workloads Chuchu targets today, and it leaves room to add a richer collection type later without changing what these arrays mean.",
+      },
+      {
+        type: "paragraph",
+        text: "The language reference lists the array rules and the runtime checks in full. The numerical example is a good place to start if you want to compile one yourself.",
+      },
+    ],
+  },
 ];
 
 /** The featured post is the newest one marked as featured, else the newest post. */

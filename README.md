@@ -63,6 +63,9 @@ enable Google Analytics. Without it, no analytics script is loaded.
 
 - `app/page.tsx`: the homepage (server component)
 - `app/about/page.tsx`: the About page (server component)
+- `app/blogs/page.tsx`: the blog index
+- `app/blogs/[slug]/page.tsx`: statically generated post pages
+- `lib/blog.ts`: post content, dates, tags and ordering
 - `components/featured-video.tsx`: responsive YouTube player on the homepage
 - `components/vscode-extension.tsx`: shared VS Code extension section
 - `components/how-it-works.tsx`: the six-stage compiler stepper (client)

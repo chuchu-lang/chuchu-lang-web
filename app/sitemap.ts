@@ -34,8 +34,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl("/blogs"),
-      // Fixed value: new Date() is not allowed here with cacheComponents enabled.
-      lastModified: "2026-10-29",
+      // Tracks the newest post instead of using new Date(), which
+      // cacheComponents does not allow here.
+      lastModified: POSTS[0]?.date ?? "2026-10-29",
       changeFrequency: "monthly",
       priority: 0.7,
     },

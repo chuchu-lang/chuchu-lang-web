@@ -33,9 +33,7 @@ export async function generateMetadata({
   const post = getPost(slug);
 
   if (!post) {
-    return {
-      title: "Post not found",
-    };
+    notFound();
   }
 
   return {
