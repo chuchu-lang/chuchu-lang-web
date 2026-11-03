@@ -27,7 +27,7 @@ const geistMono = Geist_Mono({
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
-const TITLE = "Chuchu — A high-performance, statically typed programming language";
+const TITLE = "Chuchu Programming Language | Native Performance";
 
 export const metadata: Metadata = {
   // Resolves every relative URL below (canonical, OG images, manifest) against

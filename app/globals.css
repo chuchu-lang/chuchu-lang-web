@@ -1138,17 +1138,64 @@ button {
 }
 .hero-title {
   margin: 0;
+  max-width: 100%;
   font-family: var(--display);
   font-size: clamp(50px, 7.6vw, 100px);
   font-weight: 700;
   line-height: 0.96;
   letter-spacing: -0.045em;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 .hero-title > span {
   display: block;
 }
 .hero-title .accent {
   color: var(--accent);
+}
+
+.explore-section {
+  padding: 0 0 clamp(24px, 4vw, 56px);
+}
+.explore-head {
+  margin-bottom: 22px;
+}
+.explore-title {
+  margin-top: 0;
+}
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.explore-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 176px;
+  padding: 22px 22px 20px;
+  border-radius: 22px;
+  transition: transform 0.35s var(--ease), border-color 0.35s, box-shadow 0.35s;
+}
+.explore-card:hover {
+  transform: translateY(-4px);
+}
+.explore-card-title {
+  font-family: var(--display);
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+.explore-card-copy {
+  margin-top: auto;
+  color: var(--muted);
+  line-height: 1.6;
+}
+@media (max-width: 780px) {
+  .explore-grid {
+    grid-template-columns: 1fr;
+  }
 }
 :root[data-theme="dark"] .hero-title .accent,
 :root[data-theme="dark"] .hero-title .uline,

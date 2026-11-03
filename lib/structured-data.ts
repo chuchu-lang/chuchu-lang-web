@@ -25,6 +25,7 @@ export function siteStructuredData() {
         "@id": WEBSITE_ID,
         url: absoluteUrl("/"),
         name: site.name,
+        alternateName: "Chuchu Programming Language",
         description: site.description,
         inLanguage: site.language,
         publisher: { "@id": ORGANIZATION_ID },

@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import HowItWorks from "@/components/how-it-works";
 import OptimizationLevels from "@/components/optimization-levels";
 import SiteFooter from "@/components/site-footer";
@@ -99,7 +100,7 @@ export default function Home() {
             className="rise hero-title"
             style={{ "--d": ".14s" } as Vars}
           >
-            <span>Simple syntax.</span>
+            <span>Chuchu: simple syntax.</span>
             <span className="accent">
               <span className="uline">
                 Serious
@@ -229,6 +230,41 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="wrap explore-section" aria-labelledby="explore-title">
+        <div className="explore-head">
+          <p className="eyebrow">
+            <b />
+            01 &middot; EXPLORE CHUCHU
+          </p>
+          <h2 id="explore-title" className="h2 explore-title">
+            Explore Chuchu
+          </h2>
+        </div>
+        <nav className="explore-grid" aria-label="Explore Chuchu sections">
+          <Link className="glass explore-card" href="/download">
+            <span className="feature-label">DOWNLOAD</span>
+            <span className="explore-card-title">Download Chuchu</span>
+            <span className="explore-card-copy">
+              Install the compiler and editor tooling for your platform.
+            </span>
+          </Link>
+          <Link className="glass explore-card" href="/about">
+            <span className="feature-label">ABOUT</span>
+            <span className="explore-card-title">About Chuchu</span>
+            <span className="explore-card-copy">
+              Learn how the language, compiler, and principles fit together.
+            </span>
+          </Link>
+          <Link className="glass explore-card" href="/blogs">
+            <span className="feature-label">BLOG</span>
+            <span className="explore-card-title">Chuchu Blog</span>
+            <span className="explore-card-copy">
+              Read notes on the compiler, performance, and implementation.
+            </span>
+          </Link>
+        </nav>
       </section>
 
       {/* MARQUEE */}
