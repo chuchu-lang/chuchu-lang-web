@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
+import { Suspense, type CSSProperties } from "react";
+import ReleaseDownloads from "@/components/release-downloads";
 import SiteFooter from "@/components/site-footer";
 import SiteNav from "@/components/site-nav";
 import VSCodeExtension from "@/components/vscode-extension";
@@ -12,7 +13,7 @@ type Vars = CSSProperties & Record<`--${string}`, string>;
 
 const TITLE = "Chuchu download: Cheeku and the VS Code extension";
 const DESCRIPTION =
-  "Build Cheeku from source and set up the Chuchu VS Code extension. Find compiler toolchain requirements, planned native archives, and VSIX installation instructions.";
+  "Download Chuchu installers for Windows, macOS and Linux, check system requirements, or build Cheeku from source. Set up the Chuchu VS Code extension.";
 
 export const metadata: Metadata = {
   title: "Download",
@@ -31,37 +32,6 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
   },
 };
-
-const PLATFORMS = [
-  {
-    "label": "macOS \u00b7 Apple Silicon",
-    "archive": "cheeku-macos-arm64",
-    "triple": "aarch64-apple-darwin",
-    "needs": "Matching LLVM 23.1 shared libraries and Apple's clang (via xcrun).",
-    "color": "#10B23F"
-  },
-  {
-    "label": "macOS \u00b7 Intel",
-    "archive": "cheeku-macos-x64",
-    "triple": "x86_64-apple-darwin",
-    "needs": "Matching Intel LLVM 23.1 shared libraries and Apple's clang (via xcrun).",
-    "color": "#FAD705"
-  },
-  {
-    "label": "Linux \u00b7 x86_64",
-    "archive": "cheeku-linux-x64",
-    "triple": "x86_64-unknown-linux-gnu",
-    "needs": "Matching LLVM 23.1 shared libraries, a compatible glibc and libstdc++, Clang, the GNU linker and libc/libm development files.",
-    "color": "#FD8AB9"
-  },
-  {
-    "label": "Windows \u00b7 x86_64",
-    "archive": "cheeku-windows-x64",
-    "triple": "x86_64-pc-windows-msvc",
-    "needs": "LLVM's clang-cl, the x64 Visual Studio C++ Build Tools, the Windows SDK and a compatible MSVC runtime.",
-    "color": "#10B23F"
-  }
-];
 
 export default function DownloadsPage() {
   return (
@@ -99,7 +69,7 @@ export default function DownloadsPage() {
         </h1>
         <p className="rise about-lede" style={{ "--d": ".22s" } as Vars}>
           Cheeku turns .chuchu source files into fast native executables
-          through LLVM. Build the compiler from source and add the Chuchu
+          through LLVM. Install the compiler for your platform and add the Chuchu
           extension to VS Code for editing, navigation and build commands.
         </p>
         <div className="rise about-actions" style={{ "--d": ".32s" } as Vars}>
@@ -118,53 +88,10 @@ export default function DownloadsPage() {
         </div>
       </section>
 
-      {/* STATUS NOTICE */}
       <section className="wrap about-section" aria-labelledby="status-title">
-        <div className="glass card about-status-col">
-          <p className="feature-label">RELEASE STATUS</p>
-          <h2 id="status-title" className="about-card-title">
-            No binary release has been published yet
-          </h2>
-          <p className="feature-text">
-            Release archives are built and tested natively on every platform,
-            and are published only after all four builds pass. Until the first
-            release appears on GitHub Releases, build Cheeku from source — it
-            takes a few commands.
-          </p>
-        </div>
-      </section>
-
-      {/* ARCHIVES */}
-      <section className="wrap about-section" aria-labelledby="archives-title">
-        <p className="eyebrow">
-          <b />
-          01 &middot; RELEASE ARCHIVES
-        </p>
-        <h2 id="archives-title" className="h2 about-h2">
-          One archive per platform
-        </h2>
-        <p className="lede">
-          Each archive holds the compiler, the MIT licence and the examples. Pick
-          the one that matches your operating system and CPU — an ARM binary is
-          not an x64 one.
-        </p>
-        <div className="bento">
-          {PLATFORMS.map((platform) => (
-            <article key={platform.archive} className="glass card b6 about-card">
-              <p className="feature-label">{platform.triple.toUpperCase()}</p>
-              <h3 className="about-card-title">{platform.label}</h3>
-              <p className="feature-text">
-                <code>{platform.archive}</code>
-              </p>
-              <ul className="about-list">
-                <li>
-                  <span className="about-dot" style={{ background: platform.color }} />
-                  {platform.needs}
-                </li>
-              </ul>
-            </article>
-          ))}
-        </div>
+        <Suspense fallback={<div className="glass card about-status-col"><h2 id="status-title" className="about-card-title">Checking compiler downloads…</h2></div>}>
+          <ReleaseDownloads />
+        </Suspense>
       </section>
 
       {/* BUILD FROM SOURCE */}
@@ -174,7 +101,7 @@ export default function DownloadsPage() {
           02 &middot; BUILD FROM SOURCE
         </p>
         <h2 id="source-title" className="h2 about-h2">
-          Build Cheeku yourself
+          Build Cheeku yourself (advanced)
         </h2>
         <p className="lede">
           You need Rust 1.88 or newer and an LLVM 23.1 installation. Point{" "}
@@ -207,16 +134,16 @@ export default function DownloadsPage() {
           04 &middot; GOOD TO KNOW
         </p>
         <h2 id="notes-title" className="h2 about-h2">
-          Before you install
+          Installation notes
         </h2>
         <div className="bento">
           <article className="glass card b6 about-card">
             <p className="feature-label">DEPENDENCIES</p>
-            <h3 className="about-card-title">LLVM is not bundled</h3>
+            <h3 className="about-card-title">Bundled runtime, system toolchains</h3>
             <p className="feature-text">
-              Install LLVM and your platform&apos;s linker toolchain from their
-              vendors and keep their licences. Use installations that match your
-              architecture.
+              Official installers bundle the compiler runtime and LLVM. System
+              SDKs and C toolchains may still be required. Building from source
+              requires your own Rust and LLVM installations.
             </p>
           </article>
           <article className="glass card b6 about-card">

@@ -3206,3 +3206,19 @@ button {
     font-size: 12.5px;
   }
 }
+
+/* Installer cards follow the existing bento layout and mobile breakpoints. */
+.installer-grid { margin-top: 28px; margin-bottom: 28px; }
+.installer-card { min-width: 0; }
+.installer-checksum { margin-top: 20px; font-size: .85rem; }
+.installer-checksum summary { cursor: pointer; }
+.installer-checksum code { overflow-wrap: anywhere; }
+.installer-checksum > code { display: block; margin-top: 12px; }
+.installer-command { overflow-x: auto; margin-top: 18px; font-size: .85rem; }
+.installer-os-hint { margin-top: 20px; }
+.about-section:has([data-detected-os="windows"]) [data-installer-os="windows"],
+.about-section:has([data-detected-os="macos"]) [data-installer-os="macos"],
+.about-section:has([data-detected-os="linux"]) [data-installer-os="linux"] {
+  outline: 2px solid var(--green, #10B23F);
+  outline-offset: 3px;
+}

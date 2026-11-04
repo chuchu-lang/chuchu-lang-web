@@ -93,8 +93,7 @@ export function projectStructuredData() {
         description:
           "The Chuchu compiler. Cheeku type-checks .chuchu source files and lowers them to LLVM IR, then links a native executable.",
         applicationCategory: "DeveloperApplication",
-        operatingSystem: "macOS",
-        softwareVersion: "0.1.0",
+        operatingSystem: "Windows, macOS, Linux",
         programmingLanguage: { "@type": "ComputerLanguage", name: "Rust" },
         codeRepository: site.links.source,
         license: "https://opensource.org/license/mit",
@@ -198,7 +197,7 @@ export function downloadsStructuredData() {
     url: absoluteUrl("/download"),
     name: "Chuchu downloads: Cheeku and the VS Code extension",
     description:
-      "Build Cheeku from source and set up the Chuchu VS Code extension. Find compiler toolchain requirements, planned native archives, and VSIX installation instructions.",
+      "Download Chuchu installers for Windows, macOS and Linux, check system requirements, or build Cheeku from source. Set up the Chuchu VS Code extension.",
     inLanguage: site.language,
     isPartOf: { "@id": WEBSITE_ID },
     mainEntity: { "@id": COMPILER_ID },
