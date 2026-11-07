@@ -26,7 +26,7 @@ export default function SiteFooter() {
           <Link className="navlink" href="/about">
             About
           </Link>
-          <Link className="navlink" href="/blogs">
+          <Link className="navlink" href="/blog">
             Blog
           </Link>
           <Link className="navlink" href="/download">

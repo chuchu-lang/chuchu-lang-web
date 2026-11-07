@@ -17,6 +17,13 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  images: {
+    // Cover images are uploaded as Hygraph assets.
+    remotePatterns: [
+      { protocol: "https", hostname: "**.graphassets.com" },
+      { protocol: "https", hostname: "**.hygraph.com" },
+    ],
+  },
   turbopack: {
     rules: {
       "*.css": {
