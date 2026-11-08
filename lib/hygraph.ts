@@ -17,6 +17,12 @@ export const HYGRAPH_ENDPOINT =
   "https://ap-south-1.cdn.hygraph.com/content/cmvnygy8d0ju106uyt3hk5jdo/master";
 
 /** Fields the listing needs. The article body is deliberately excluded. */
+export type BlogAuthor = {
+  name: string;
+  role: string | null;
+  pictureUrl: string | null;
+};
+
 export type BlogPostSummary = {
   title: string;
   slug: string;
@@ -24,6 +30,7 @@ export type BlogPostSummary = {
   /** ISO 8601 timestamp. */
   createdAt: string;
   imageUrl: string | null;
+  author: BlogAuthor | null;
 };
 
 export type BlogPost = BlogPostSummary & {
@@ -47,6 +54,13 @@ const LIST_QUERY = /* GraphQL */ `
       image {
         url
       }
+      authorBlogs {
+        role
+        title
+        profilePicture {
+          url
+        }
+      }
     }
   }
 `;
@@ -60,6 +74,13 @@ const POST_QUERY = /* GraphQL */ `
       createdAt
       image {
         url
+      }
+      authorBlogs {
+        role
+        title
+        profilePicture {
+          url
+        }
       }
       content {
         markdown
@@ -109,14 +130,42 @@ async function hygraphRequest<T>(
   return json.data;
 }
 
+type RawAuthor = {
+  role?: unknown;
+  title?: unknown;
+  profilePicture?: { url?: unknown } | null;
+};
+
 type RawPost = {
   title?: unknown;
   slug?: unknown;
   excerpt?: unknown;
   createdAt?: unknown;
   image?: { url?: unknown } | null;
+  authorBlogs?: RawAuthor | RawAuthor[] | null;
   content?: { markdown?: unknown } | null;
 };
+
+function httpsUrl(value: unknown): string | null {
+  return typeof value === "string" && value.startsWith("https://")
+    ? value
+    : null;
+}
+
+function toAuthor(raw: RawPost["authorBlogs"]): BlogAuthor | null {
+  const author = Array.isArray(raw) ? raw[0] : raw;
+  if (!author || typeof author.title !== "string" || !author.title.trim()) {
+    return null;
+  }
+  return {
+    name: author.title,
+    role:
+      typeof author.role === "string" && author.role.trim()
+        ? author.role
+        : null,
+    pictureUrl: httpsUrl(author.profilePicture?.url),
+  };
+}
 
 function toSummary(raw: RawPost | null | undefined): BlogPostSummary | null {
   if (!raw) return null;
@@ -130,16 +179,13 @@ function toSummary(raw: RawPost | null | undefined): BlogPostSummary | null {
   ) {
     return null;
   }
-  const imageUrl = raw.image?.url;
   return {
     title,
     slug,
     excerpt: typeof excerpt === "string" ? excerpt : "",
     createdAt,
-    imageUrl:
-      typeof imageUrl === "string" && imageUrl.startsWith("https://")
-        ? imageUrl
-        : null,
+    imageUrl: httpsUrl(raw.image?.url),
+    author: toAuthor(raw.authorBlogs),
   };
 }
 

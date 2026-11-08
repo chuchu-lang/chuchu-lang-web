@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { Suspense } from "react";
 import Link from "next/link";
+import BlogAuthor from "@/components/blog-author";
 import BlogAmbient from "@/components/blog-ambient";
 import BlogCover from "@/components/blog-cover";
 import SiteFooter from "@/components/site-footer";
@@ -90,7 +91,11 @@ async function Posts() {
               <p className="blog-card-text">{post.excerpt}</p>
             ) : null}
             <div className="blog-card-foot">
-              <span />
+              {post.author ? (
+                <BlogAuthor author={post.author} compact />
+              ) : (
+                <span />
+              )}
               <Link
                 className="blog-card-link"
                 href={`/blog/${post.slug}`}

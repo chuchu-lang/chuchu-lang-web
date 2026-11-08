@@ -4,8 +4,8 @@ import { LANGUAGE_ID, ORGANIZATION_ID, WEBSITE_ID } from "./structured-data";
 
 /**
  * schema.org nodes for the Hygraph-powered /blog routes. Only fields that
- * exist in the BlogPost model are used; there is no per-article author, so the
- * publisher is the site's existing Organization node.
+ * exist in the BlogPost model are used. The author comes from the linked
+ * author entry; the publisher is the site's existing Organization node.
  */
 
 const BLOG_ID = `${absoluteUrl("/blog")}#blog`;
@@ -43,6 +43,16 @@ export function hygraphPostStructuredData(post: BlogPost) {
     ...(post.excerpt ? { description: post.excerpt } : {}),
     ...(post.imageUrl ? { image: [post.imageUrl] } : {}),
     datePublished: post.createdAt,
+    ...(post.author
+      ? {
+          author: {
+            "@type": "Person",
+            name: post.author.name,
+            ...(post.author.role ? { jobTitle: post.author.role } : {}),
+            ...(post.author.pictureUrl ? { image: post.author.pictureUrl } : {}),
+          },
+        }
+      : {}),
     inLanguage: site.language,
     publisher: { "@id": ORGANIZATION_ID },
     isPartOf: { "@id": BLOG_ID },

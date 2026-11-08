@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import BlogAuthor from "@/components/blog-author";
 import BlogAmbient from "@/components/blog-ambient";
 import BlogCover from "@/components/blog-cover";
 import BlogMarkdown, { stripLeadingTitle } from "@/components/blog-markdown";
@@ -60,6 +61,7 @@ export async function generateMetadata({
     title: post.title,
     description,
     alternates: { canonical: path },
+    authors: post.author ? [{ name: post.author.name }] : undefined,
     openGraph: {
       type: "article",
       url: path,
@@ -115,6 +117,7 @@ function PostContent({ result }: { result: Awaited<ReturnType<typeof getBlogPost
         </div>
         <h1 className="blog-post-title">{post.title}</h1>
         {post.excerpt ? <p className="blog-post-lede">{post.excerpt}</p> : null}
+        {post.author ? <BlogAuthor author={post.author} /> : null}
       </header>
 
       <div className="wrap about-section blog-article-wrap">
