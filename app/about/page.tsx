@@ -113,6 +113,7 @@ const FACTS = [
 const IMPLEMENTED = [
   "Line and block comments with colored annotations in the docs",
   "Inferred local variables with typed reassignment",
+  "Deferred declarations: declare a variable now, let its first assignment set the type",
   "Signed integers, floats, booleans and homogeneous fixed-size numeric arrays",
   "Arithmetic, comparisons, grouping and unary negation",
   "if / else, while, lexical scope and block shadowing",
